@@ -1,0 +1,46 @@
+<main class="profile-container">
+  <header class="main-header">
+    <nav class="navigation">
+      <div class="logo">RL</div>
+      <ul class="nav-links">
+        <li class="nav-item active">
+          <a href="#home">HOME</a>
+          <div class="active-indicator"></div>
+        </li>
+        <li class="nav-item"><a href="#projects">PROJECTS</a></li>
+        <li class="nav-item"><a href="#about">ABOUT</a></li>
+        <li class="nav-item"><a href="#contact">CONTACT</a></li>
+      </ul>
+    </nav>
+    <div class="theme-toggle">
+      <button (click)="toggleTheme()" class="theme-button">LIGHT</button>
+      <button (click)="toggleTheme()" class="theme-button">DARK</button>
+    </div>
+    <button (click)="contactMe()" class="contact-button">Contact Me</button>
+  </header>
+
+  <section class="hero-section">
+    <h1 class="hero-title">Harel Yerushalmi</h1>
+    <div class="hero-content">
+      <img
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/099324a15108d97767e495151498082e8c8426914a190a66355e6db1436311e8?placeholderIfAbsent=true&apiKey=35960337db5941e9bd1575cc88cebf51"
+        alt="Profile image" class="profile-image">
+      <p class="hero-description">
+        I'm a full-stack web developer <br>
+        and do some music too <br>
+        ¡check out some stuff! <br>
+      </p>
+    </div>
+  </section>
+
+  <app-carousel></app-carousel>
+  <a class="bubble" href="\assets\files\CV - Harel Yerushalmi.pdf" download="CV - Harel Yerushalmi.pdf">
+    <img class="bubble-img" src="\assets\images\bubble.png">
+    <div class="cv">
+      <div class="text">CV</div>
+      <img class="download-icon" src="\assets\images\download-icon.png">
+    </div>
+  </a>
+
+  <app-contact-me></app-contact-me>
+</main>

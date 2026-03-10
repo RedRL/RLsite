@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+/* Dynamically adjust root font size based on viewport width */
+html {
+    font-size: calc(16px + 0.5vw);
+    /* Root font size grows with viewport width */
+}
+
+body {
+    margin: 0;
+    padding: 0
+}
+
+@font-face {
+    font-family: 'K2D';
+    src: url('assets/fonts/K2D/K2D-Regular.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-Italic.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-Thin.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-ThinItalic.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-SemiBold.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-SemiBoldItalic.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-ExtraLight.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-ExtraLightItalic.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-ExtraBoldItalic.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-Light.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-LightItalic.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-Medium.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-MediumItalic.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-ExtraBold.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-BoldItalic.ttf') format('truetype');
+    src: url('assets/fonts/K2D/K2D-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

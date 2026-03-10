@@ -1,0 +1,37 @@
+.contact-me {
+    font-family: 'K2D';
+    display: block;
+    position: relative;
+    width: fit-content;
+    margin: auto;
+
+    .title {
+        font-size: 4rem;
+    }
+
+    .form {
+        margin-left: 3em;
+    }
+
+    .input-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3em;
+        margin-bottom: 1em;
+
+        label {
+            margin-left: 0.6em;
+        }
+
+        .input-area {
+            background: #f9c25b4a;
+            border: none;
+            height: 4em;
+            border-radius: 1rem;
+        }
+
+        textarea {
+            resize: none;
+        }
+    }
+}
