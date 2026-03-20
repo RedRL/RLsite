@@ -1,54 +1,99 @@
-.carousel-container {
-    position: relative;
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.project-card {
+  display: grid;
+  gap: 1.15rem;
+  padding: 1rem;
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.project-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.4rem;
+  aspect-ratio: 1.15 / 0.8;
+  background: rgba(255, 255, 255, 0.04);
+
+  img {
     width: 100%;
-    max-width: 1000px; /* Adjust as needed */
-    margin: auto;
-    overflow: hidden;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 320ms ease;
   }
-  
-  .carousel {
-    display: flex;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+}
+
+.project-card:hover .project-media img {
+  transform: scale(1.05);
+}
+
+.project-body {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.project-subtitle {
+  margin: 0;
+  color: var(--secondary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin: 0;
+  font-family: 'K2D', sans-serif;
+  font-size: 1.8rem;
+}
+
+.project-description {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+
+  span {
+    padding: 0.5rem 0.8rem;
+    border-radius: 999px;
+    background: var(--secondary-soft);
+    color: var(--text);
+    font-size: 0.82rem;
   }
-  
-  .carousel-item {
-    flex: 0 0 auto;
-    width: 100%;
-    scroll-snap-align: start;
-  
-    img {
-      width: 100%;
-      height: auto;
-      cursor: pointer;
-      object-fit: cover;
-    }
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-width: 10rem;
+  padding: 0.9rem 1.15rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--primary-strong), var(--primary));
+  color: #fff;
+  box-shadow: 0 16px 34px rgba(157, 46, 255, 0.24);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.project-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 38px rgba(157, 46, 255, 0.3);
+}
+
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 10;
-    transition: background-color 0.3s ease;
-  
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-  }
-  
-  .left-arrow {
-    left: 0;
-  }
-  
-  .right-arrow {
-    right: 0;
-  }
-  
+}

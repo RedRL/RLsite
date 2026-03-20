@@ -1,45 +1,57 @@
-<section class="contact-me">
+<section class="contact-shell">
+  <div class="contact-copy" appScrollReveal>
+    <span class="eyebrow">Let's talk</span>
+    <h2 class="section-title">Contact Me</h2>
+    <p>
+      Need a portfolio refresh, product landing page, or a frontend that feels more premium? Send a
+      message and your email app will open with the details ready to go.
+    </p>
+    <a class="direct-link" [href]="'mailto:' + email()">{{ email() }}</a>
+  </div>
 
-  <div class="title">Contact Me</div>
-
-  <form class="form" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-    <!-- Name Input -->
+  <form class="contact-form glass-card" [formGroup]="contactForm" (ngSubmit)="onSubmit()" appScrollReveal [revealDelay]="120">
     <div class="input-container">
-      <label for="name">name</label>
-      <input class="input-area" id="name" formControlName="name" />
-      <div *ngIf="contactForm.get('name').invalid && contactForm.get('name').touched">
-        <span *ngIf="contactForm.get('name').errors?.['required']">Name is required.</span>
-        <span *ngIf="contactForm.get('name').errors?.['invalidName']">Invalid name. Only letters allowed.</span>
-      </div>
-    </div>
-
-    <!-- Email Input -->
-    <div class="input-container">
-      <label for="email">email</label>
-      <input class="input-area" id="email" formControlName="email" />
-      @if (contactForm.get('email').invalid && contactForm.get('email').touched) {
-      <span *ngIf="contactForm.get('email').errors?.['required']">Email is required.</span>
-      <span *ngIf="contactForm.get('email').errors?.['email']">Invalid email format.</span>
-      <span *ngIf="contactForm.get('email').errors?.['invalidEmail']">Invalid email address.</span>
-      }
-      @else {
-      <span>&nbsp;</span>
+      <label for="name">Name</label>
+      <input id="name" class="input-area" type="text" formControlName="name" placeholder="Enter your name here..." />
+      @if (contactForm.controls.name.invalid && contactForm.controls.name.touched) {
+        <span class="error-message">
+          @if (contactForm.controls.name.errors?.['required']) { Name is required. }
+          @else { Use letters and spaces only. }
+        </span>
       }
     </div>
 
-    <!-- Message Input -->
     <div class="input-container">
-      <label for="message">message</label>
-      <textarea class="input-area" id="message" formControlName="message"></textarea>
-      <div *ngIf="contactForm.get('message').invalid && contactForm.get('message').touched">
-        <span *ngIf="contactForm.get('message').errors?.['required']">Message is required.</span>
-        <span *ngIf="contactForm.get('message').errors?.['minlength']">Message must be at least 10 characters
-          long.</span>
-      </div>
+      <label for="email">Email</label>
+      <input id="email" class="input-area" type="email" formControlName="email" placeholder="Enter your email here..." />
+      @if (contactForm.controls.email.invalid && contactForm.controls.email.touched) {
+        <span class="error-message">
+          @if (contactForm.controls.email.errors?.['required']) { Email is required. }
+          @else { Enter a valid email address. }
+        </span>
+      }
     </div>
 
-    <!-- Submit Button -->
-    <button type="submit" [disabled]="contactForm.invalid">Submit</button>
+    <div class="input-container">
+      <label for="message">Message</label>
+      <textarea
+        id="message"
+        class="input-area input-area-textarea"
+        formControlName="message"
+        rows="5"
+        placeholder="Share the idea, timeline, and what you want to build..."></textarea>
+      @if (contactForm.controls.message.invalid && contactForm.controls.message.touched) {
+        <span class="error-message">
+          @if (contactForm.controls.message.errors?.['required']) { Message is required. }
+          @else { Please write at least 20 characters. }
+        </span>
+      }
+    </div>
+
+    <button type="submit" class="submit-button">Start the conversation</button>
+
+    @if (formSent()) {
+      <p class="success-message">Your email app should be opening now.</p>
+    }
   </form>
-
 </section>

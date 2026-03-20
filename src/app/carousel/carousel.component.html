@@ -1,55 +1,29 @@
-<div class="wraps">
-  <div class="wraps-all-offers">
-      <swiper-container dir="rtl" [config]="swiperConfig" navigation-next-el=".button-next"
-          navigation-prev-el=".button-prev">
-          <!-- <swiper-slide class="swip-box box-customers" *ngFor="let offer of offersCmsData | slice:0:6">
-              <app-single-offer [cmsData]="offer"></app-single-offer>
-          </swiper-slide> -->
-          <swiper-slide class="swip-box box-customers">
-            <div class="1">
-              <img src="assets\images\carousel\small-bubble.png">
-            </div>
-          </swiper-slide>
-          <swiper-slide class="swip-box box-customers">
-            <div class="1">
-              <img src="assets\images\carousel\small-bubble.png">
-            </div>
-          </swiper-slide>
-          <swiper-slide class="swip-box box-customers">
-            <div class="1">
-              <img src="assets\images\carousel\small-bubble.png">
-            </div>
-          </swiper-slide>
-      </swiper-container>
-
-      <div 
-          class="button-next swiper-button-next icon-chevron-left-thick"></div>
-      <div 
-          class="button-prev swiper-button-prev icon-chevron-right-thick"></div>
-  </div>
-</div>
-
-<!-- <div class="carousel-container">
-    <div class="carousel" #carousel>
-      <div
-        class="carousel-item"
-        *ngFor="let item of items"
-        (click)="onItemClick(item)"
-      >
-        <img [src]="item.image" [alt]="item.altText" />
+<div class="projects-grid">
+  @for (project of projects(); track project.title; let i = $index) {
+    <article class="project-card glass-card" appScrollReveal [revealDelay]="110 * i">
+      <div class="project-media">
+        <img [src]="project.image" [alt]="project.title">
       </div>
-    </div>
-  
-    <button class="arrow left-arrow" (click)="prev()">&#10094;</button>
-    <button class="arrow right-arrow" (click)="next()">&#10095;</button>
-  </div>
-   -->
 
-<!-- <swiper [config]="config" (swiper)="onSwiper($event)" (slideChange)="onSlideChange()">
-  <ng-template swiperSlide>Slide 1</ng-template>
-  <ng-template swiperSlide>Slide 2</ng-template>
-  <ng-template swiperSlide>Slide 3</ng-template>
-  <ng-template swiperSlide>Slide 4</ng-template>
-  <ng-template swiperSlide>Slide 5</ng-template>
-  <ng-template swiperSlide>Slide 6</ng-template>
-</swiper> -->
+      <div class="project-body">
+        <p class="project-subtitle">{{ project.subtitle }}</p>
+        <h3>{{ project.title }}</h3>
+        <p class="project-description">{{ project.description }}</p>
+
+        <div class="project-tags">
+          @for (tag of project.stack; track tag) {
+            <span>{{ tag }}</span>
+          }
+        </div>
+
+        <a
+          class="project-link"
+          [href]="project.href"
+          [attr.target]="project.href.startsWith('http') ? '_blank' : null"
+          [attr.rel]="project.href.startsWith('http') ? 'noreferrer' : null">
+          Explore project
+        </a>
+      </div>
+    </article>
+  }
+</div>

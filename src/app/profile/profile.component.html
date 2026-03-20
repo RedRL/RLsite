@@ -1,46 +1,188 @@
-<main class="profile-container">
-  <header class="main-header">
-    <nav class="navigation">
-      <div class="logo">RL</div>
-      <ul class="nav-links">
-        <li class="nav-item active">
-          <a href="#home">HOME</a>
-          <div class="active-indicator"></div>
-        </li>
-        <li class="nav-item"><a href="#projects">PROJECTS</a></li>
-        <li class="nav-item"><a href="#about">ABOUT</a></li>
-        <li class="nav-item"><a href="#contact">CONTACT</a></li>
-      </ul>
+<main class="profile-shell">
+  <div class="backdrop-grid" aria-hidden="true"></div>
+
+  <header class="site-header glass-card">
+    <a class="brand" href="#home" (click)="scrollToSection('home'); $event.preventDefault()">
+      <span class="brand-mark">RL</span>
+      <span class="brand-copy">Yerushalmi</span>
+    </a>
+
+    <nav class="navigation" aria-label="Primary">
+      @for (item of navItems; track item.target) {
+        <a href="#{{ item.target }}" (click)="scrollToSection(item.target); $event.preventDefault()">
+          {{ item.label }}
+        </a>
+      }
     </nav>
-    <div class="theme-toggle">
-      <button (click)="toggleTheme()" class="theme-button">LIGHT</button>
-      <button (click)="toggleTheme()" class="theme-button">DARK</button>
+
+    <div class="header-actions">
+      <div class="theme-switch glass-card" role="group" aria-label="Theme toggle">
+        <button
+          type="button"
+          [class.active]="theme() === 'light'"
+          (click)="setTheme('light')">
+          Light
+        </button>
+        <button
+          type="button"
+          [class.active]="theme() === 'dark'"
+          (click)="setTheme('dark')">
+          Dark
+        </button>
+      </div>
+
+      <button type="button" class="cta-button" (click)="scrollToSection('contact')">
+        Contact Me
+      </button>
     </div>
-    <button (click)="contactMe()" class="contact-button">Contact Me</button>
   </header>
 
-  <section class="hero-section">
-    <h1 class="hero-title">Harel Yerushalmi</h1>
-    <div class="hero-content">
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/099324a15108d97767e495151498082e8c8426914a190a66355e6db1436311e8?placeholderIfAbsent=true&apiKey=35960337db5941e9bd1575cc88cebf51"
-        alt="Profile image" class="profile-image">
-      <p class="hero-description">
-        I'm a full-stack web developer <br>
-        and do some music too <br>
-        ¡check out some stuff! <br>
+  <section id="home" class="hero-section">
+    <div class="hero-copy" appScrollReveal>
+      <span class="eyebrow">Creative developer portfolio</span>
+      <h1 class="hero-title">Harel Yerushalmi</h1>
+      <p class="hero-text">
+        I design and build cinematic web experiences with sharp typography, interactive motion,
+        and clean frontend architecture that scales.
       </p>
+
+      <div class="hero-buttons">
+        <a class="primary-link" href="assets/files/CV - Harel Yerushalmi.pdf" download>
+          Download CV
+        </a>
+        <button type="button" class="ghost-link" (click)="scrollToSection('projects')">
+          See Projects
+        </button>
+      </div>
+
+      <div class="social-links">
+        @for (social of socialLinks; track social.label) {
+          <a
+            [href]="social.href"
+            [attr.target]="social.kind === 'email' ? null : '_blank'"
+            [attr.rel]="social.kind === 'email' ? null : 'noreferrer'"
+            [attr.aria-label]="social.label">
+            @switch (social.kind) {
+              @case ('github') {
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2C6.48 2 2 6.58 2 12.22c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.21-3.37-1.21-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.35 1.11 2.92.85.09-.67.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.09 0-1.13.39-2.05 1.03-2.77-.1-.26-.45-1.32.1-2.74 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.7.12 2.49.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.42.2 2.48.1 2.74.64.72 1.03 1.64 1.03 2.77 0 3.96-2.35 4.82-4.59 5.08.36.32.69.95.69 1.92 0 1.39-.01 2.5-.01 2.84 0 .27.18.6.69.49A10.24 10.24 0 0 0 22 12.22C22 6.58 17.52 2 12 2Z" />
+                </svg>
+              }
+              @case ('linkedin') {
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.37 1.56 1.56 0 0 1 6.94 8.5Zm1.31 1.17H5.62V18h2.63V9.67Zm4.2 0H9.86V18h2.59v-4.38c0-1.15.22-2.26 1.64-2.26 1.4 0 1.42 1.31 1.42 2.34V18h2.6v-4.83c0-2.37-.51-4.19-3.28-4.19-1.33 0-2.21.74-2.58 1.44h-.04V9.67Z" />
+                </svg>
+              }
+              @case ('email') {
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 6.75A2.75 2.75 0 0 1 5.75 4h12.5A2.75 2.75 0 0 1 21 6.75v10.5A2.75 2.75 0 0 1 18.25 20H5.75A2.75 2.75 0 0 1 3 17.25V6.75Zm2.2-.15 6.2 5.16a1 1 0 0 0 1.28 0l6.12-5.16H5.2Zm13.8 1.3-5.84 4.92a2.98 2.98 0 0 1-3.84 0L5 7.9v9.35c0 .41.34.75.75.75h12.5c.41 0 .75-.34.75-.75V7.9Z" />
+                </svg>
+              }
+            }
+            <span class="sr-only">{{ social.label }}</span>
+          </a>
+        }
+      </div>
+    </div>
+
+    <div class="hero-visual" appScrollReveal [revealDelay]="120">
+      <div class="hero-orb">
+        <span class="orb-ring orb-ring-a"></span>
+        <span class="orb-ring orb-ring-b"></span>
+        <a class="orb-bubble" href="assets/files/CV - Harel Yerushalmi.pdf" download aria-label="Download CV">
+          <span class="orb-bubble__icon orb-bubble__icon--document" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M8 3.75A1.75 1.75 0 0 1 9.75 2h5.19c.46 0 .9.18 1.23.51l3.32 3.32c.33.33.51.77.51 1.23v10.19A1.75 1.75 0 0 1 18.25 18H8a1.75 1.75 0 0 1-1.75-1.75v-10.5ZM15 3.81V6a1 1 0 0 0 1 1h2.19L15 3.81ZM9.5 10.25a.75.75 0 0 0 0 1.5h5a.75.75 0 0 0 0-1.5h-5Zm0 3a.75.75 0 0 0 0 1.5h5a.75.75 0 0 0 0-1.5h-5Z" />
+            </svg>
+          </span>
+          <span class="orb-bubble__icon orb-bubble__icon--download" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 3a.75.75 0 0 1 .75.75v9.44l2.72-2.72a.75.75 0 1 1 1.06 1.06l-4 4a.75.75 0 0 1-1.06 0l-4-4a.75.75 0 1 1 1.06-1.06l2.72 2.72V3.75A.75.75 0 0 1 12 3Z" />
+              <path d="M5 15.75A.75.75 0 0 1 5.75 15h12.5a.75.75 0 0 1 0 1.5H5.75A.75.75 0 0 1 5 15.75Zm1 3.5a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H6.75a.75.75 0 0 1-.75-.75Z" />
+            </svg>
+          </span>
+          <span class="orb-bubble__label" aria-hidden="true">Download CV</span>
+        </a>
+      </div>
     </div>
   </section>
 
-  <app-carousel></app-carousel>
-  <a class="bubble" href="\assets\files\CV - Harel Yerushalmi.pdf" download="CV - Harel Yerushalmi.pdf">
-    <img class="bubble-img" src="\assets\images\bubble.png">
-    <div class="cv">
-      <div class="text">CV</div>
-      <img class="download-icon" src="\assets\images\download-icon.png">
+  <section id="about" class="content-section about-section">
+    <div class="section-intro" appScrollReveal>
+      <span class="eyebrow">About me</span>
+      <h2 class="section-title">About me</h2>
     </div>
-  </a>
 
-  <app-contact-me></app-contact-me>
+    <div class="about-layout">
+      <article class="about-card glass-card" appScrollReveal [revealDelay]="100">
+        <img
+          src="assets/images/profile.png"
+          alt="Portrait of Harel Yerushalmi">
+      </article>
+
+      <article class="about-copy glass-card" appScrollReveal [revealDelay]="180">
+        <p>
+          Most days I am translating ideas into visual systems that feel memorable, fast, and easy
+          to use. I like interfaces that look bold but stay practical underneath.
+        </p>
+        <p>
+          This refreshed portfolio leans into the reference you shared: strong contrast, neon glow,
+          layered circles, and smooth scroll choreography, while still being fully functional in
+          light and dark mode.
+        </p>
+        <button type="button" class="inline-link" (click)="scrollToSection('contact')">
+          Let's build something
+        </button>
+      </article>
+    </div>
+
+    <div class="stats-grid">
+      @for (stat of stats; track stat.label; let i = $index) {
+        <article class="stat-card glass-card" appScrollReveal [revealDelay]="80 * i">
+          <strong>{{ stat.value }}</strong>
+          <span>{{ stat.label }}</span>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section id="skills" class="content-section skills-section">
+    <div class="section-intro" appScrollReveal>
+      <span class="eyebrow">What I use</span>
+      <h2 class="section-title">My Skills</h2>
+    </div>
+
+    <div class="skills-grid">
+      @for (group of skillGroups; track group.name; let i = $index) {
+        <article class="skill-card glass-card" appScrollReveal [revealDelay]="110 * i">
+          <h3>{{ group.name }}</h3>
+          <ul>
+            @for (item of group.items; track item) {
+              <li>
+                <span>{{ item }}</span>
+                <span class="skill-dots" aria-hidden="true"></span>
+              </li>
+            }
+          </ul>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section id="projects" class="content-section projects-section">
+    <div class="section-intro" appScrollReveal>
+      <span class="eyebrow">Selected work</span>
+      <h2 class="section-title">My Projects</h2>
+    </div>
+
+    <app-carousel [projects]="projects"></app-carousel>
+  </section>
+
+  <section id="contact" class="content-section contact-section">
+    <app-contact-me email="hello@harelyerushalmi.dev"></app-contact-me>
+  </section>
+
+  <footer class="site-footer">
+    <span>&copy; {{ currentYear }} Harel Yerushalmi. Designed to glow in every theme.</span>
+  </footer>
 </main>
