@@ -138,18 +138,22 @@
     background-color 220ms ease;
 }
 
-.cta-button,
 .primary-link {
   background: linear-gradient(135deg, var(--primary-strong), var(--primary));
   color: #fff;
   box-shadow: 0 16px 36px rgba(157, 46, 255, 0.28);
 }
 
+.cta-button,
 .ghost-link,
 .inline-link {
   background: transparent;
   color: var(--text);
   border: 1px solid var(--border);
+}
+
+.cta-button {
+  box-shadow: none;
 }
 
 .cta-button:hover,
@@ -187,6 +191,16 @@
   color: var(--text-muted);
   font-size: clamp(1rem, 1.8vw, 1.15rem);
   line-height: 1.8;
+}
+
+.hero-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 600;
+  text-transform: none;
 }
 
 .hero-buttons,
@@ -440,22 +454,28 @@
 }
 
 .about-layout {
+  --about-panel-height: 31rem;
   display: grid;
-  grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
-  gap: 1.5rem;
+  grid-template-columns: minmax(280px, 0.84fr) minmax(0, 1.16fr);
+  gap: 0.85rem;
+  position: relative;
+  align-items: stretch;
+  isolation: isolate;
 }
 
 .about-card,
 .about-copy,
-.stat-card,
-.skill-card {
+.stat-card {
   border-radius: 2rem;
 }
 
 .about-card {
   position: relative;
   overflow: hidden;
-  min-height: 25rem;
+  width: min(100%, var(--about-panel-height));
+  justify-self: start;
+  height: var(--about-panel-height);
+  min-height: var(--about-panel-height);
   padding: 1rem;
   background:
     radial-gradient(circle at top right, rgba(101, 245, 226, 0.18), transparent 35%),
@@ -471,11 +491,191 @@
 }
 
 .about-copy {
-  padding: 2rem;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  height: var(--about-panel-height);
+  min-height: var(--about-panel-height);
+  max-height: var(--about-panel-height);
+  overflow: hidden;
+  transform-origin: top right;
+  animation: about-collapse 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.stats-grid,
-.skills-grid {
+.about-copy__content {
+  display: grid;
+  height: 100%;
+  align-content: start;
+  gap: 1.15rem;
+  padding: 2rem 2rem 6.5rem;
+  overflow: hidden;
+  opacity: 0.96;
+  transform: translateY(0);
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 280ms ease;
+}
+
+.about-copy__content p {
+  margin: 0;
+}
+
+.about-copy.expanded {
+  position: absolute;
+  inset: 0;
+  grid-column: 1 / -1;
+  z-index: 3;
+  width: 100%;
+  min-height: 100%;
+  max-height: none;
+  height: 100%;
+  overflow: hidden;
+  animation: about-expand 380ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+.about-copy.expanded .about-copy__content {
+  overflow: auto;
+  padding: 2rem 3.75rem 1.9rem 2rem;
+  opacity: 1;
+  transform: translateY(0);
+  animation: about-content-in 320ms cubic-bezier(0.2, 0.9, 0.2, 1) 90ms both;
+}
+
+.about-copy.expanded .about-copy__content p {
+  max-width: 60rem;
+}
+
+.about-actions {
+  position: absolute;
+  right: 2rem;
+  bottom: 1.75rem;
+  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.about-copy.expanded .about-actions {
+  position: absolute;
+  right: 2rem;
+  bottom: 1.75rem;
+  top: auto;
+  left: auto;
+  order: 0;
+  margin: 0;
+  z-index: 4;
+  animation: about-toggle-in 300ms cubic-bezier(0.2, 0.9, 0.2, 1) 140ms both;
+}
+
+.about-fade {
+  position: absolute;
+  inset: auto 0 0;
+  height: 12rem;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(9, 13, 30, 0) 0%, var(--surface) 100%);
+}
+
+.about-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  z-index: 4;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(10, 15, 36, 0.2);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    background-color 180ms ease;
+}
+
+.about-toggle svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: currentColor;
+  transition: transform 220ms ease;
+}
+
+.about-copy.expanded .about-toggle svg {
+  transform: rotate(180deg);
+}
+
+.about-toggle:hover,
+.about-toggle:focus-visible {
+  transform: translateY(-2px);
+  color: var(--secondary);
+  border-color: rgba(101, 245, 226, 0.45);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.about-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 0;
+  background: transparent;
+}
+
+@keyframes about-expand {
+  from {
+    opacity: 0.4;
+    transform: translateX(1.3rem) scale(0.985);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateX(-0.15rem) scale(1.002);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes about-collapse {
+  from {
+    opacity: 0.82;
+    transform: translateX(-0.35rem) scale(1.006);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes about-content-in {
+  from {
+    opacity: 0;
+    transform: translateX(0.85rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes about-toggle-in {
+  from {
+    opacity: 0;
+    transform: translateX(0.5rem) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.stats-grid {
   display: grid;
   gap: 1rem;
   margin-top: 1.5rem;
@@ -501,44 +701,6 @@
   }
 }
 
-.skills-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.skill-card {
-  padding: 1.6rem;
-
-  h3 {
-    margin: 0 0 1.1rem;
-    font-family: 'K2D', sans-serif;
-    font-size: 1.5rem;
-  }
-
-  ul {
-    display: grid;
-    gap: 0.9rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  li {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 1rem;
-    color: var(--text-muted);
-  }
-}
-
-.skill-dots {
-  height: 0.55rem;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle, var(--primary) 2px, transparent 3px) left center / 0.85rem 100% repeat-x,
-    linear-gradient(90deg, rgba(226, 64, 255, 0.22), rgba(101, 245, 226, 0.22));
-}
-
 .contact-section {
   padding-bottom: 1rem;
 }
@@ -558,8 +720,7 @@
 
   .hero-section,
   .about-layout,
-  .stats-grid,
-  .skills-grid {
+  .stats-grid {
     grid-template-columns: 1fr;
   }
 
@@ -570,6 +731,45 @@
 
   .hero-visual {
     order: -1;
+  }
+
+  .about-copy,
+  .about-copy.expanded {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    padding: 2rem;
+    min-height: auto;
+    max-height: none;
+    height: auto;
+    overflow: visible;
+    animation: none;
+  }
+
+  .about-copy__content,
+  .about-copy.expanded .about-copy__content {
+    height: auto;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .about-card {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .about-fade,
+  .about-backdrop {
+    display: none;
+  }
+
+  .about-actions,
+  .about-copy.expanded .about-actions {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    margin-top: 0.35rem;
   }
 }
 
@@ -621,3 +821,5 @@
     }
   }
 }
+
+

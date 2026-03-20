@@ -1,28 +1,47 @@
 <div class="projects-grid">
   @for (project of projects(); track project.title; let i = $index) {
-    <article class="project-card glass-card" appScrollReveal [revealDelay]="110 * i">
-      <div class="project-media">
-        <img [src]="project.image" [alt]="project.title">
-      </div>
+    <article
+      class="project-card glass-card"
+      [class.project-card-featured]="!!project.audioSrc"
+      appScrollReveal
+      [revealDelay]="110 * i">
+      @if (project.image) {
+        <div
+          class="project-media"
+          [class.project-media-square]="!project.audioSrc"
+          [class.project-media-genre]="project.title === 'Music Genre Classification'">
+          <img [src]="project.image" [alt]="project.title">
+        </div>
+      }
 
       <div class="project-body">
         <p class="project-subtitle">{{ project.subtitle }}</p>
         <h3>{{ project.title }}</h3>
+
+        @if (project.prompt) {
+          <p class="project-prompt">{{ project.prompt }}</p>
+        }
+
+        @if (project.audioSrc) {
+          <div class="project-audio">
+            <audio controls preload="none">
+              <source [src]="project.audioSrc" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        }
+
         <p class="project-description">{{ project.description }}</p>
 
-        <div class="project-tags">
-          @for (tag of project.stack; track tag) {
-            <span>{{ tag }}</span>
-          }
+        <div class="project-links">
+          <a
+            class="project-link"
+            [href]="project.href"
+            [attr.target]="project.href.startsWith('http') ? '_blank' : null"
+            [attr.rel]="project.href.startsWith('http') ? 'noreferrer' : null">
+            {{ project.linkLabel ?? 'Explore project' }}
+          </a>
         </div>
-
-        <a
-          class="project-link"
-          [href]="project.href"
-          [attr.target]="project.href.startsWith('http') ? '_blank' : null"
-          [attr.rel]="project.href.startsWith('http') ? 'noreferrer' : null">
-          Explore project
-        </a>
       </div>
     </article>
   }

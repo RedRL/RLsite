@@ -40,16 +40,13 @@
   <section id="home" class="hero-section">
     <div class="hero-copy" appScrollReveal>
       <span class="eyebrow">Creative developer portfolio</span>
-      <h1 class="hero-title">Harel Yerushalmi</h1>
-      <p class="hero-text">
-        I design and build cinematic web experiences with sharp typography, interactive motion,
-        and clean frontend architecture that scales.
+      <h1 class="hero-title">Harel J. Yerushalmi</h1>
+      <p class="hero-text hero-summary">
+        full-stack developer <span aria-hidden="true">&bull;</span> musician
+        <span aria-hidden="true">&bull;</span> teacher
       </p>
 
       <div class="hero-buttons">
-        <a class="primary-link" href="assets/files/CV - Harel Yerushalmi.pdf" download>
-          Download CV
-        </a>
         <button type="button" class="ghost-link" (click)="scrollToSection('projects')">
           See Projects
         </button>
@@ -120,20 +117,76 @@
           alt="Portrait of Harel Yerushalmi">
       </article>
 
-      <article class="about-copy glass-card" appScrollReveal [revealDelay]="180">
-        <p>
-          Most days I am translating ideas into visual systems that feel memorable, fast, and easy
-          to use. I like interfaces that look bold but stay practical underneath.
-        </p>
-        <p>
-          This refreshed portfolio leans into the reference you shared: strong contrast, neon glow,
-          layered circles, and smooth scroll choreography, while still being fully functional in
-          light and dark mode.
-        </p>
-        <button type="button" class="inline-link" (click)="scrollToSection('contact')">
-          Let's build something
-        </button>
+      <article
+        class="about-copy glass-card"
+        [class.expanded]="aboutExpanded()"
+        appScrollReveal
+        [revealDelay]="180">
+        <div #aboutCopyPanel class="about-copy__content">
+          <p>
+            I am a Full-Stack Developer with a strong foundation in software engineering and a
+            long-standing passion for technology and music.
+          </p>
+          <p>
+            My interest in programming began at an early age and continued through my academic
+            studies, including a specialization in Computer Science during high school and advanced
+            programming training as part of the Atuda (Yud-Gimel) program. During this time, I
+            gained extensive experience in object-oriented programming using languages such as Java,
+            C#, and Assembly.
+          </p>
+          <p>
+            I hold a Bachelor&apos;s degree in Computer Science from Reichman University. In my current
+            role as a Full-Stack Developer, I design and build web applications using Angular and C#,
+            focusing on creating scalable, reliable, and user-focused solutions.
+          </p>
+          <p>
+            Alongside my technical career, music has remained an important part of my personal and
+            creative development. I began playing the trumpet in high school and later performed with
+            the Kleiman Big Band at the Jerusalem Academy of Music. After completing my degree, I
+            continued my musical education at the Rimon School of Music, where I further developed
+            skills in composition, performance, piano, and vocal work.
+          </p>
+          <p>
+            I also have extensive experience in education and mentoring. I have worked as a Computer
+            Science and Mathematics teacher, tutor, and teaching assistant at both Reichman
+            University and Zeev School in Herzliya. These roles strengthened my ability to
+            communicate complex concepts clearly and support the growth of others.
+          </p>
+          <p>
+            I am motivated by opportunities to solve meaningful problems, continuously expand my
+            skills, and contribute to impactful technological solutions.
+          </p>
+        </div>
+        <div class="about-actions">
+          <button
+            type="button"
+            class="about-toggle"
+            (click)="toggleAboutExpanded(aboutCopyPanel)"
+            [attr.aria-label]="aboutExpanded() ? 'Collapse about me' : 'Expand about me'">
+            @if (!aboutExpanded()) {
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4.75 9A.75.75 0 0 1 4 8.25v-3.5A.75.75 0 0 1 4.75 4h3.5a.75.75 0 0 1 0 1.5H6.56l3.97 3.97a.75.75 0 1 1-1.06 1.06L5.5 6.56v1.69A.75.75 0 0 1 4.75 9Zm14.5 0a.75.75 0 0 1-.75-.75V6.56l-3.97 3.97a.75.75 0 1 1-1.06-1.06l3.97-3.97h-1.69a.75.75 0 0 1 0-1.5h3.5a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-.75.75ZM9.47 14.53a.75.75 0 0 1 1.06 0L6.56 18.5h1.69a.75.75 0 0 1 0 1.5h-3.5A.75.75 0 0 1 4 19.25v-3.5a.75.75 0 0 1 1.5 0v1.69l3.97-3.97Zm5.06 0a.75.75 0 0 1 1.06 0l3.97 3.97v-1.69a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-.75.75h-3.5a.75.75 0 0 1 0-1.5h1.69l-3.97-3.97a.75.75 0 0 1 0-1.06Z" />
+              </svg>
+            } @else {
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8.25 5.5h-2a.75.75 0 0 0-.75.75v2a.75.75 0 0 1-1.5 0v-2A2.25 2.25 0 0 1 6.25 4h2a.75.75 0 0 1 0 1.5Zm9.5 0h-2a.75.75 0 0 1 0-1.5h2A2.25 2.25 0 0 1 20 6.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75Zm.75 10.25a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 17.75 20h-2a.75.75 0 0 1 0-1.5h2a.75.75 0 0 0 .75-.75v-2Zm-13 0a.75.75 0 0 1 1.5 0v2a.75.75 0 0 0 .75.75h2a.75.75 0 0 1 0 1.5h-2A2.25 2.25 0 0 1 4 17.75v-2a.75.75 0 0 1 .75-.75Z" />
+              </svg>
+            }
+            <span class="sr-only">{{ aboutExpanded() ? 'Collapse about me' : 'Expand about me' }}</span>
+          </button>
+        </div>
+        @if (!aboutExpanded()) {
+          <div class="about-fade" aria-hidden="true"></div>
+        }
       </article>
+      @if (aboutExpanded()) {
+        <button
+          type="button"
+          class="about-backdrop"
+          (click)="toggleAboutExpanded(aboutCopyPanel)"
+          aria-label="Collapse about me overlay">
+        </button>
+      }
     </div>
 
     <div class="stats-grid">
@@ -146,33 +199,14 @@
     </div>
   </section>
 
-  <section id="skills" class="content-section skills-section">
-    <div class="section-intro" appScrollReveal>
-      <span class="eyebrow">What I use</span>
-      <h2 class="section-title">My Skills</h2>
-    </div>
-
-    <div class="skills-grid">
-      @for (group of skillGroups; track group.name; let i = $index) {
-        <article class="skill-card glass-card" appScrollReveal [revealDelay]="110 * i">
-          <h3>{{ group.name }}</h3>
-          <ul>
-            @for (item of group.items; track item) {
-              <li>
-                <span>{{ item }}</span>
-                <span class="skill-dots" aria-hidden="true"></span>
-              </li>
-            }
-          </ul>
-        </article>
-      }
-    </div>
-  </section>
-
   <section id="projects" class="content-section projects-section">
     <div class="section-intro" appScrollReveal>
-      <span class="eyebrow">Selected work</span>
-      <h2 class="section-title">My Projects</h2>
+      <span class="eyebrow">Machine learning</span>
+      <h2 class="section-title">Machine Learning Projects</h2>
+      <p class="section-copy">
+        Over the years, I have built many machine learning projects, mostly in Python and also in
+        Java. Here are some examples from that work.
+      </p>
     </div>
 
     <app-carousel [projects]="projects"></app-carousel>
