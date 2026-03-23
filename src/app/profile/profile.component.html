@@ -199,6 +199,52 @@
     </div>
   </section>
 
+  <section class="content-section app-showcase-section">
+    <div class="section-intro" appScrollReveal>
+      <span class="eyebrow">Featured app</span>
+      <h2 class="section-title">Brain Power MVP</h2>
+      <p class="section-copy">
+        The Brain Power app was built and sold as a primal app idea, and this section showcases the
+        MVP through an embedded phone simulation.
+      </p>
+    </div>
+
+    <div class="app-showcase-layout">
+      <article class="app-showcase-copy glass-card" appScrollReveal [revealDelay]="80">
+        <span class="app-showcase-kicker">MVP concept</span>
+        <h3>Explore the app inside a phone simulation</h3>
+        <p>
+          Brain Power was created as an MVP around a primal app idea and was intended for elderly
+          users, with a focus on improving quality of life and overall well-being through an
+          accessible mobile experience.
+        </p>
+        <p class="app-showcase-note">
+          Note: due to unexpected AWS overcharges, some content in this preview may currently be
+          unavailable.
+        </p>
+      </article>
+
+      <article class="app-device-wrap" appScrollReveal [revealDelay]="160">
+        <div class="app-device-shadow" aria-hidden="true"></div>
+        <div class="app-device glass-card">
+          <div class="app-device__top" aria-hidden="true">
+            <span class="app-device__camera"></span>
+            <span class="app-device__speaker"></span>
+          </div>
+
+          <div class="app-device__screen">
+            <iframe
+              src="https://yerushalmi-rl.com/brain-power-app/"
+              title="Brain Power app live preview"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin">
+            </iframe>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <section id="projects" class="content-section projects-section">
     <div class="section-intro" appScrollReveal>
       <span class="eyebrow">Machine learning</span>
