@@ -347,6 +347,118 @@
     </div>
   }
 
+  <section class="content-section aws-showcase-section">
+    <div class="section-intro" appScrollReveal>
+      <span class="eyebrow">AWS project</span>
+      <h2 class="section-title">License Plate Recognition on AWS</h2>
+      <p class="section-copy">
+        Upload a car image, detect its plate number, and then query the database for the result. The
+        full system is deployed in AWS.
+      </p>
+    </div>
+
+    <div class="aws-showcase-layout">
+      <article class="aws-showcase-copy glass-card" appScrollReveal [revealDelay]="80">
+        <span class="app-showcase-kicker">Cloud-deployed system</span>
+        <h3>From image upload to searchable and editable results</h3>
+        <p>
+          An Angular frontend lets users upload vehicle images and query detections. A Flask API
+          stores images in S3, queues processing with SQS, an EC2 worker runs OpenALPR, and the
+          detected plate data is saved to MySQL on RDS and returned to the app.
+        </p>
+        <div class="checkers-showcase-actions">
+          <a
+            class="inline-link"
+            href="https://github.com/RedRL/license-plate-recognition-aws"
+            target="_blank"
+            rel="noreferrer">
+            View on GitHub
+          </a>
+        </div>
+        <p class="checkers-showcase-note">Coming soon: a live demo here!</p>
+      </article>
+
+      <article class="aws-tech-card glass-card" appScrollReveal [revealDelay]="160">
+        <h3>Technologies used</h3>
+        <div class="aws-tech-list" aria-label="AWS project technologies">
+          <span>Angular</span>
+          <span>Python</span>
+          <span>Flask</span>
+          <span>AWS EC2</span>
+          <span>AWS S3</span>
+          <span>AWS SQS</span>
+          <span>AWS RDS MySQL</span>
+          <span>OpenALPR</span>
+          <span>Nginx</span>
+          <span>CloudFormation</span>
+        </div>
+      </article>
+    </div>
+
+    <article class="aws-flow-card glass-card" appScrollReveal [revealDelay]="220">
+      <h3>AWS flow</h3>
+      <div class="aws-flow" aria-label="License plate recognition project flow">
+        <div class="aws-flow__step">
+          <div class="aws-flow__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M5.5 6A2.5 2.5 0 0 0 3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7A2.5 2.5 0 0 0 18.5 6h-13Zm0 1.5h13c.55 0 1 .45 1 1v5.18l-2.33-2.33a1.25 1.25 0 0 0-1.77 0l-1.84 1.84-3.22-3.22a1.25 1.25 0 0 0-1.77 0L4.5 14.04V8.5c0-.55.45-1 1-1Zm2.1 1.45a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8Z" />
+            </svg>
+          </div>
+          <strong>Car image</strong>
+          <span>User uploads a vehicle photo.</span>
+        </div>
+
+        <span class="aws-flow__arrow" aria-hidden="true">&#8594;</span>
+
+        <div class="aws-flow__step">
+          <div class="aws-flow__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M5.75 3A2.75 2.75 0 0 0 3 5.75v8.5A2.75 2.75 0 0 0 5.75 17h3.11l-.9 2.25H6.75a.75.75 0 0 0 0 1.5h10.5a.75.75 0 0 0 0-1.5h-1.21L15.14 17h3.11A2.75 2.75 0 0 0 21 14.25v-8.5A2.75 2.75 0 0 0 18.25 3H5.75Zm0 1.5h12.5c.69 0 1.25.56 1.25 1.25v8.5c0 .69-.56 1.25-1.25 1.25H5.75c-.69 0-1.25-.56-1.25-1.25v-8.5c0-.69.56-1.25 1.25-1.25Z" />
+            </svg>
+          </div>
+          <strong>Angular + Flask</strong>
+          <span>The frontend sends the image to the API.</span>
+        </div>
+
+        <span class="aws-flow__arrow" aria-hidden="true">&#8594;</span>
+
+        <div class="aws-flow__step">
+          <div class="aws-flow__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 3.25c-4.42 0-8 1.5-8 3.35v10.8c0 1.85 3.58 3.35 8 3.35s8-1.5 8-3.35V6.6c0-1.85-3.58-3.35-8-3.35Zm0 1.5c3.95 0 6.5 1.28 6.5 1.85S15.95 8.45 12 8.45 5.5 7.17 5.5 6.6 8.05 4.75 12 4.75Zm-6.5 4.1c1.5.98 4.04 1.5 6.5 1.5s5-.52 6.5-1.5v2.3c0 .57-2.55 1.85-6.5 1.85s-6.5-1.28-6.5-1.85v-2.3Zm0 4.55c1.5.98 4.04 1.5 6.5 1.5s5-.52 6.5-1.5v3c0 .57-2.55 1.85-6.5 1.85s-6.5-1.28-6.5-1.85v-3Z" />
+            </svg>
+          </div>
+          <strong>S3 + SQS</strong>
+          <span>The image is stored and queued for processing.</span>
+        </div>
+
+        <span class="aws-flow__arrow" aria-hidden="true">&#8594;</span>
+
+        <div class="aws-flow__step">
+          <div class="aws-flow__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M6.75 3A2.75 2.75 0 0 0 4 5.75v12.5A2.75 2.75 0 0 0 6.75 21h10.5A2.75 2.75 0 0 0 20 18.25V5.75A2.75 2.75 0 0 0 17.25 3H6.75Zm0 1.5h10.5c.69 0 1.25.56 1.25 1.25v12.5c0 .69-.56 1.25-1.25 1.25H6.75c-.69 0-1.25-.56-1.25-1.25V5.75c0-.69.56-1.25 1.25-1.25Zm2 2.5a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Zm0 3.75a.75.75 0 0 0 0 1.5h2.1a2.9 2.9 0 1 0 2.3 0h2.1a.75.75 0 0 0 0-1.5h-6.5Zm3.25 1.05a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8Zm-3.25 4.2a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Z" />
+            </svg>
+          </div>
+          <strong>EC2 + OpenALPR</strong>
+          <span>The worker detects plate number and color.</span>
+        </div>
+
+        <span class="aws-flow__arrow" aria-hidden="true">&#8594;</span>
+
+        <div class="aws-flow__step">
+          <div class="aws-flow__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M4.75 4A2.75 2.75 0 0 0 2 6.75v10.5A2.75 2.75 0 0 0 4.75 20h14.5A2.75 2.75 0 0 0 22 17.25V6.75A2.75 2.75 0 0 0 19.25 4H4.75Zm0 1.5h14.5c.69 0 1.25.56 1.25 1.25v10.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25V6.75c0-.69.56-1.25 1.25-1.25Zm2.5 2.25a.75.75 0 0 0 0 1.5h9.5a.75.75 0 0 0 0-1.5h-9.5Zm0 3.5a.75.75 0 0 0 0 1.5h5.25a.75.75 0 0 0 0-1.5H7.25Zm0 3.5a.75.75 0 0 0 0 1.5h9.5a.75.75 0 0 0 0-1.5h-9.5Z" />
+            </svg>
+          </div>
+          <strong>RDS + app UI</strong>
+          <span>Results are saved, queried, and can be edited.</span>
+        </div>
+      </div>
+    </article>
+  </section>
+
   <section id="projects" class="content-section projects-section">
     <div class="section-intro" appScrollReveal>
       <span class="eyebrow">Machine learning</span>
