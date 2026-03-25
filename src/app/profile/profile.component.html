@@ -106,7 +106,6 @@
 
   <section id="about" class="content-section about-section">
     <div class="section-intro" appScrollReveal>
-      <span class="eyebrow">About me</span>
       <h2 class="section-title">About me</h2>
     </div>
 
@@ -199,7 +198,14 @@
     </div>
   </section>
 
-  <section class="content-section app-showcase-section">
+  <section id="projects" class="content-section app-showcase-section">
+    <div class="section-intro" appScrollReveal>
+      <h2 class="section-title">Projects</h2>
+      <p class="section-copy">
+        A selection of product, cloud, software, and machine learning projects.
+      </p>
+    </div>
+
     <div class="section-intro" appScrollReveal>
       <span class="eyebrow">Featured app</span>
       <h2 class="section-title">Brain Power MVP</h2>
@@ -222,6 +228,15 @@
           Note: due to unexpected AWS overcharges, some content in this preview may currently be
           unavailable.
         </p>
+        <div class="checkers-showcase-actions">
+          <a
+            class="inline-link project-github-link"
+            href="https://github.com/RedRL/brain-power-app"
+            target="_blank"
+            rel="noreferrer">
+            View on GitHub
+          </a>
+        </div>
       </article>
 
       <article class="app-device-wrap" appScrollReveal [revealDelay]="160">
@@ -267,7 +282,7 @@
 
         <div class="checkers-showcase-actions">
           <a
-            class="inline-link"
+            class="inline-link project-github-link"
             href="https://github.com/RedRL/Checkers-Game"
             target="_blank"
             rel="noreferrer">
@@ -368,7 +383,7 @@
         </p>
         <div class="checkers-showcase-actions">
           <a
-            class="inline-link"
+            class="inline-link project-github-link"
             href="https://github.com/RedRL/license-plate-recognition-aws"
             target="_blank"
             rel="noreferrer">
@@ -459,7 +474,7 @@
     </article>
   </section>
 
-  <section id="projects" class="content-section projects-section">
+  <section id="ml-projects" class="content-section projects-section">
     <div class="section-intro" appScrollReveal>
       <span class="eyebrow">Machine learning</span>
       <h2 class="section-title">Machine Learning Projects</h2>
@@ -470,6 +485,27 @@
     </div>
 
     <app-carousel [projects]="projects"></app-carousel>
+  </section>
+
+  <section class="content-section github-section">
+    <article class="github-card glass-card" appScrollReveal>
+      <div class="github-copy">
+        <span class="eyebrow">More projects</span>
+        <h2 class="section-title">Explore more on GitHub</h2>
+        <p class="section-copy">
+          For more projects across different subjects, check out my GitHub account.
+        </p>
+      </div>
+
+      <a
+        class="github-avatar-link"
+        href="https://github.com/RedRL"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Open Harel Yerushalmi GitHub account">
+        <img src="assets/images/github.png" alt="GitHub account">
+      </a>
+    </article>
   </section>
 
   <section id="contact" class="content-section contact-section">
