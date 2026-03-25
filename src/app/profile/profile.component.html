@@ -508,6 +508,128 @@
     </article>
   </section>
 
+  <section id="music" class="content-section music-section">
+    <div class="section-intro" appScrollReveal>
+      <h2 class="section-title">Music</h2>
+      <p class="section-copy">
+        Do you like music? And I mean real music, not the kind made through code... When I take a
+        break from coding, I like to make some of my own.
+      </p>
+    </div>
+
+    <div class="music-grid">
+      <article class="music-card glass-card" appScrollReveal [revealDelay]="80">
+        <button
+          type="button"
+          class="music-card__media"
+          (click)="openMusicVideo('L35m56sl4YE', 'תמר')"
+          aria-label="Watch תמר on YouTube">
+          <img
+            src="https://img.youtube.com/vi/L35m56sl4YE/hqdefault.jpg"
+            alt="Thumbnail for תמר music clip">
+          <span class="music-card__play" aria-hidden="true">&#9658;</span>
+        </button>
+        <div class="music-card__body">
+          <span class="music-card__eyebrow">Original release</span>
+          <h3>תמר</h3>
+          <p>
+            An original song, with some AI touches in the clip from back when AI was still
+            pretty young.
+          </p>
+          <a
+            class="inline-link project-github-link music-card__link"
+            href="https://www.youtube.com/watch?v=L35m56sl4YE&list=RDL35m56sl4YE&start_radio=1"
+            target="_blank"
+            rel="noreferrer">
+            View on YouTube
+          </a>
+        </div>
+      </article>
+
+      <article class="music-card glass-card" appScrollReveal [revealDelay]="140">
+        <button
+          type="button"
+          class="music-card__media"
+          (click)="openMusicVideo('j1oaxODjCTg', 'כן / מנסה')"
+          aria-label="Watch כן / מנסה on YouTube">
+          <img
+            src="https://img.youtube.com/vi/j1oaxODjCTg/hqdefault.jpg"
+            alt="Thumbnail for כן / מנסה music clip">
+          <span class="music-card__play" aria-hidden="true">&#9658;</span>
+        </button>
+        <div class="music-card__body">
+          <span class="music-card__eyebrow">Original release</span>
+          <h3>כן / מנסה</h3>
+          <p>
+            An original song and video clip, created together with my brother.
+          </p>
+          <a
+            class="inline-link project-github-link music-card__link"
+            href="https://www.youtube.com/watch?v=j1oaxODjCTg&list=RDj1oaxODjCTg&start_radio=1"
+            target="_blank"
+            rel="noreferrer">
+            View on YouTube
+          </a>
+        </div>
+      </article>
+
+      <article class="music-card glass-card" appScrollReveal [revealDelay]="200">
+        <button
+          type="button"
+          class="music-card__media"
+          (click)="openMusicVideo('8LqiYpObWZc', 'DOR 34')"
+          aria-label="Watch DOR 34 on YouTube">
+          <img
+            src="https://img.youtube.com/vi/8LqiYpObWZc/hqdefault.jpg"
+            alt="Thumbnail for DOR 34 music clip">
+          <span class="music-card__play" aria-hidden="true">&#9658;</span>
+        </button>
+        <div class="music-card__body">
+          <span class="music-card__eyebrow">Hybrid production</span>
+          <h3>DOR 34</h3>
+          <p>
+            A song written by me and composed with Suno. The images and animations were created with
+            Sora, and the video was edited in CapCut.
+          </p>
+          <a
+            class="inline-link project-github-link music-card__link"
+            href="https://www.youtube.com/watch?v=8LqiYpObWZc&list=RD8LqiYpObWZc&start_radio=1"
+            target="_blank"
+            rel="noreferrer">
+            View on YouTube
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  @if (activeMusicVideo(); as video) {
+    <div class="lightbox-backdrop" (click)="closeMusicVideo()">
+      <div
+        class="lightbox-dialog music-video-dialog glass-card"
+        role="dialog"
+        aria-modal="true"
+        [attr.aria-label]="'Playing ' + video.title"
+        (click)="$event.stopPropagation()">
+        <button
+          type="button"
+          class="lightbox-close"
+          (click)="closeMusicVideo()"
+          aria-label="Close music video">
+          &times;
+        </button>
+        <div class="music-video-dialog__frame">
+          <iframe
+            [src]="video.embedUrl"
+            [title]="video.title + ' YouTube video'"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  }
+
   <section id="contact" class="content-section contact-section">
     <app-contact-me email="hello@harelyerushalmi.dev"></app-contact-me>
   </section>

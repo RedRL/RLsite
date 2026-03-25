@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, PLATFORM_ID, inject, signal, DOCUMENT } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CarouselComponent } from '../carousel/carousel.component';
 import { ContactMeComponent } from '../contact-me/contact-me.component';
 import { ScrollRevealDirective } from '../shared/scroll-reveal.directive';
@@ -20,6 +21,11 @@ interface SocialLink {
 interface ShowcaseImage {
   readonly src: string;
   readonly alt: string;
+}
+
+interface MusicVideoOverlay {
+  readonly title: string;
+  readonly embedUrl: SafeResourceUrl;
 }
 
 export interface ProjectCard {
@@ -44,11 +50,13 @@ export interface ProjectCard {
 export class ProfileComponent {
   private readonly document = inject(DOCUMENT);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly sanitizer = inject(DomSanitizer);
   private readonly storageKey = 'rlsite-theme';
 
   protected readonly aboutExpanded = signal(false);
   protected readonly activeCheckersIndex = signal(0);
   protected readonly checkersLightboxImage = signal<ShowcaseImage | null>(null);
+  protected readonly activeMusicVideo = signal<MusicVideoOverlay | null>(null);
   protected readonly theme = signal<ThemeMode>('dark');
   protected readonly currentYear = new Date().getFullYear();
   protected readonly checkersVisibleOffsets = [-1, 0, 1] as const;
@@ -56,6 +64,7 @@ export class ProfileComponent {
     { label: 'Home', target: 'home' },
     { label: 'About', target: 'about' },
     { label: 'Projects', target: 'projects' },
+    { label: 'Music', target: 'music' },
     { label: 'Contact', target: 'contact' }
   ];
   protected readonly socialLinks: readonly SocialLink[] = [
@@ -183,6 +192,19 @@ export class ProfileComponent {
 
   protected closeCheckersLightbox(): void {
     this.checkersLightboxImage.set(null);
+  }
+
+  protected openMusicVideo(videoId: string, title: string): void {
+    this.activeMusicVideo.set({
+      title,
+      embedUrl: this.sanitizer.bypassSecurityTrustResourceUrl(
+        `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`
+      )
+    });
+  }
+
+  protected closeMusicVideo(): void {
+    this.activeMusicVideo.set(null);
   }
 
   private applyTheme(theme: ThemeMode): void {
