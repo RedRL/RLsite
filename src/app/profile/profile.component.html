@@ -245,6 +245,108 @@
     </div>
   </section>
 
+  <section class="content-section checkers-showcase-section">
+    <div class="section-intro" appScrollReveal>
+      <span class="eyebrow">Classic build</span>
+      <h2 class="section-title">Checkers Game in C#</h2>
+      <p class="section-copy">
+        Do you like checkers? This C# game can be played against ChatGPT, with commentary on the
+        player&apos;s moves.
+      </p>
+    </div>
+
+    <div class="checkers-showcase-layout">
+      <article class="checkers-showcase-copy glass-card" appScrollReveal [revealDelay]="80">
+        <span class="app-showcase-kicker">C# desktop game</span>
+        <h3>Classic checkers with a newer ChatGPT twist</h3>
+        <p>
+          I built this whole checkers game, except for the play-against-GPT feature, 7 years ago,
+          before generative AI even existed. Wild times. Can you imagine building all of that
+          yourself today? I can&apos;t...
+        </p>
+
+        <div class="checkers-showcase-actions">
+          <a
+            class="inline-link"
+            href="https://github.com/RedRL/Checkers-Game"
+            target="_blank"
+            rel="noreferrer">
+            View on GitHub
+          </a>
+        </div>
+
+        <p class="checkers-showcase-note">Coming soon: playing the game here online!</p>
+      </article>
+
+      <div class="checkers-gallery" appScrollReveal [revealDelay]="160">
+        <button
+          type="button"
+          class="checkers-gallery__nav"
+          (click)="previousCheckersSlide()"
+          aria-label="Previous checkers screenshot">
+          &#8249;
+        </button>
+
+        <div class="checkers-gallery__viewport">
+          @for (offset of checkersVisibleOffsets; track offset) {
+            <button
+              type="button"
+              class="checkers-gallery__slide glass-card"
+              [class.is-active]="offset === 0"
+              [class.is-side]="offset !== 0"
+              (click)="openCheckersLightbox(getCheckersSlide(offset))"
+              [attr.aria-label]="'Open ' + getCheckersSlide(offset).alt">
+              <img
+                [src]="getCheckersSlide(offset).src"
+                [alt]="getCheckersSlide(offset).alt"
+                loading="lazy">
+            </button>
+          }
+        </div>
+
+        <button
+          type="button"
+          class="checkers-gallery__nav"
+          (click)="nextCheckersSlide()"
+          aria-label="Next checkers screenshot">
+          &#8250;
+        </button>
+      </div>
+
+      <div class="checkers-gallery__dots" aria-label="Checkers screenshot navigation">
+        @for (screen of checkersScreens; track screen.src; let i = $index) {
+          <button
+            type="button"
+            class="checkers-gallery__dot"
+            [class.is-active]="activeCheckersIndex() === i"
+            (click)="selectCheckersSlide(i)"
+            [attr.aria-label]="'Show screenshot ' + (i + 1)">
+          </button>
+        }
+      </div>
+    </div>
+  </section>
+
+  @if (checkersLightboxImage(); as image) {
+    <div class="lightbox-backdrop" (click)="closeCheckersLightbox()">
+      <div
+        class="lightbox-dialog glass-card"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Enlarged checkers screenshot"
+        (click)="$event.stopPropagation()">
+        <button
+          type="button"
+          class="lightbox-close"
+          (click)="closeCheckersLightbox()"
+          aria-label="Close enlarged screenshot">
+          &times;
+        </button>
+        <img [src]="image.src" [alt]="image.alt">
+      </div>
+    </div>
+  }
+
   <section id="projects" class="content-section projects-section">
     <div class="section-intro" appScrollReveal>
       <span class="eyebrow">Machine learning</span>

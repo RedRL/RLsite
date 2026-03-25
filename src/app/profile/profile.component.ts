@@ -17,6 +17,11 @@ interface SocialLink {
   readonly kind: 'github' | 'linkedin' | 'email';
 }
 
+interface ShowcaseImage {
+  readonly src: string;
+  readonly alt: string;
+}
+
 export interface ProjectCard {
   readonly title: string;
   readonly subtitle: string;
@@ -42,8 +47,11 @@ export class ProfileComponent {
   private readonly storageKey = 'rlsite-theme';
 
   protected readonly aboutExpanded = signal(false);
+  protected readonly activeCheckersIndex = signal(0);
+  protected readonly checkersLightboxImage = signal<ShowcaseImage | null>(null);
   protected readonly theme = signal<ThemeMode>('dark');
   protected readonly currentYear = new Date().getFullYear();
+  protected readonly checkersVisibleOffsets = [-1, 0, 1] as const;
   protected readonly navItems: readonly NavItem[] = [
     { label: 'Home', target: 'home' },
     { label: 'About', target: 'about' },
@@ -59,6 +67,14 @@ export class ProfileComponent {
     { value: '3+', label: 'Years building polished web experiences' },
     { value: '12', label: 'Concept-to-launch portfolio and product builds' },
     { value: '100%', label: 'Responsive, animated, and theme-aware UI' }
+  ] as const;
+  protected readonly checkersScreens: readonly ShowcaseImage[] = [
+    { src: 'assets/images/checkers/open-screen.png', alt: 'Checkers game opening screen' },
+    { src: 'assets/images/checkers/6x6.png', alt: 'Checkers game board in 6 by 6 mode' },
+    { src: 'assets/images/checkers/8x8.png', alt: 'Checkers game board in 8 by 8 mode' },
+    { src: 'assets/images/checkers/10x10.png', alt: 'Checkers game board in 10 by 10 mode' },
+    { src: 'assets/images/checkers/king.png', alt: 'Checkers game king piece screen' },
+    { src: 'assets/images/checkers/GPT-comment.png', alt: 'Checkers game playing against ChatGPT' }
   ] as const;
   protected readonly projects: readonly ProjectCard[] = [
     {
@@ -141,11 +157,43 @@ export class ProfileComponent {
     this.aboutExpanded.set(!expanded);
   }
 
+  protected previousCheckersSlide(): void {
+    this.activeCheckersIndex.update((index) => this.getWrappedCheckersIndex(index - 1));
+  }
+
+  protected nextCheckersSlide(): void {
+    this.activeCheckersIndex.update((index) => this.getWrappedCheckersIndex(index + 1));
+  }
+
+  protected selectCheckersSlide(index: number): void {
+    this.activeCheckersIndex.set(this.getWrappedCheckersIndex(index));
+  }
+
+  protected getCheckersSlide(indexOffset: number): ShowcaseImage {
+    return this.checkersScreens[this.getCheckersSlideIndex(indexOffset)];
+  }
+
+  protected getCheckersSlideIndex(indexOffset: number): number {
+    return this.getWrappedCheckersIndex(this.activeCheckersIndex() + indexOffset);
+  }
+
+  protected openCheckersLightbox(image: ShowcaseImage): void {
+    this.checkersLightboxImage.set(image);
+  }
+
+  protected closeCheckersLightbox(): void {
+    this.checkersLightboxImage.set(null);
+  }
+
   private applyTheme(theme: ThemeMode): void {
     this.document.documentElement.setAttribute('data-theme', theme);
 
     if (isPlatformBrowser(this.platformId)) {
       window.localStorage.setItem(this.storageKey, theme);
     }
+  }
+
+  private getWrappedCheckersIndex(index: number): number {
+    return (index + this.checkersScreens.length) % this.checkersScreens.length;
   }
 }
