@@ -10,6 +10,67 @@
   padding: 1rem 0 3rem;
 }
 
+.profile-shell::before,
+.profile-shell::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(34px);
+}
+
+.profile-shell::before {
+  top: 18rem;
+  left: -6rem;
+  width: 16rem;
+  height: 16rem;
+  background: radial-gradient(circle, rgba(157, 46, 255, 0.16), transparent 70%);
+}
+
+.profile-shell::after {
+  top: 48rem;
+  right: -7rem;
+  width: 20rem;
+  height: 20rem;
+  background: radial-gradient(circle, rgba(196, 90, 255, 0.14), transparent 72%);
+}
+
+.github-section::after,
+.music-section::after,
+.contact-section::before {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(30px);
+}
+
+.github-section::after {
+  right: -5rem;
+  bottom: 1rem;
+  width: 14rem;
+  height: 14rem;
+  background: radial-gradient(circle, rgba(157, 46, 255, 0.16), transparent 72%);
+}
+
+.music-section::after {
+  left: -5rem;
+  bottom: 4rem;
+  width: 16rem;
+  height: 16rem;
+  background: radial-gradient(circle, rgba(176, 74, 255, 0.16), transparent 70%);
+}
+
+.contact-section::before {
+  right: 8%;
+  bottom: -1rem;
+  width: 15rem;
+  height: 15rem;
+  background: radial-gradient(circle, rgba(157, 46, 255, 0.14), transparent 70%);
+}
+
 .backdrop-grid {
   position: absolute;
   inset: 7rem 0 auto auto;
@@ -29,7 +90,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  padding: 1rem 1.25rem;
+  padding: 1rem 1.4rem 1rem 1.75rem;
   border-radius: 999px;
   margin-top: 0.75rem;
 }
@@ -39,6 +100,7 @@
   flex-direction: column;
   line-height: 0.9;
   font-family: 'K2D', sans-serif;
+  margin-left: 0.35rem;
 }
 
 .brand-mark {
@@ -55,7 +117,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.7rem;
+  gap: 2.6rem;
 
   a {
     position: relative;
@@ -76,7 +138,7 @@
     height: 2px;
     transform: scaleX(0);
     transform-origin: left;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    background: linear-gradient(90deg, rgba(226, 64, 255, 0.95), rgba(109, 57, 255, 0.92));
     transition: transform 220ms ease;
   }
 
@@ -121,12 +183,11 @@
     background: linear-gradient(135deg, var(--primary-strong), var(--primary));
     color: #fff;
     transform: translateY(-1px);
-    box-shadow: 0 14px 30px rgba(157, 46, 255, 0.24);
   }
 
   button:hover,
   button:focus-visible {
-    box-shadow: 0 16px 34px rgba(157, 46, 255, 0.22);
+    box-shadow: none;
   }
 }
 
@@ -176,6 +237,29 @@
   position: relative;
 }
 
+.content-section::before {
+  content: '';
+  position: absolute;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(157, 46, 255, 0.18), transparent 68%);
+  filter: blur(28px);
+  opacity: 0.82;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.content-section:nth-of-type(odd)::before {
+  top: 1rem;
+  right: -4rem;
+}
+
+.content-section:nth-of-type(even)::before {
+  bottom: 0;
+  left: -4rem;
+}
+
 .hero-section {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
@@ -183,6 +267,20 @@
   align-items: center;
   min-height: calc(100vh - 7rem);
   padding: 3rem 0 2rem;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 8%;
+  left: 18%;
+  width: 9rem;
+  height: 9rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(157, 46, 255, 0.16), transparent 72%);
+  filter: blur(24px);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .hero-title {
@@ -270,8 +368,19 @@
     0 0 100px rgba(143, 75, 255, 0.24);
 }
 
-.hero-orb::before,
 .hero-orb::after {
+  content: '';
+  position: absolute;
+  inset: auto auto 10% -8%;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(157, 46, 255, 0.2), transparent 70%);
+  filter: blur(22px);
+  pointer-events: none;
+}
+
+.hero-orb::before {
   content: '';
   position: absolute;
   border: 2px dashed rgba(255, 255, 255, 0.18);
@@ -280,10 +389,6 @@
 
 .hero-orb::before {
   inset: 12% 8%;
-}
-
-.hero-orb::after {
-  content: none;
 }
 
 .orb-ring,
