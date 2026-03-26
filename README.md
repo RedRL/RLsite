@@ -1,27 +1,65 @@
 # RLsite
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+Personal portfolio site for Harel J. Yerushalmi, built with Angular as a single-page experience for presenting software projects, machine learning work, music releases, and contact details.
 
-## Development server
+## Highlights
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Hero section with theme toggle, social links, and smooth scrolling navigation
+- Expandable `About me` section with background, education, teaching, and music experience
+- Project showcase area featuring:
+  - `Brain Power MVP` in a live phone-style embed
+  - `Checkers Game in C#` with an interactive image carousel and lightbox
+  - `License Plate Recognition on AWS` with architecture summary and visual flow
+  - `Machine Learning Projects` carousel
+  - GitHub callout for more work
+- Music section with three video cards and in-page YouTube modal playback
+- Simplified contact section with email options and WhatsApp CTA
+- Light and dark themes with animated purple/teal accent styling
 
-## Code scaffolding
+## Tech Stack
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Angular 21
+- TypeScript
+- SCSS
+- Angular standalone components
+- Angular signals
 
-## Build
+## Project Structure
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- `src/app/profile/` - main portfolio page layout and section content
+- `src/app/carousel/` - reusable machine learning projects carousel
+- `src/app/contact-me/` - simplified contact section
+- `src/app/shared/` - shared UI behavior such as scroll reveal
+- `src/assets/` - images, fonts, media, and downloadable files
 
-## Running unit tests
+## Local Development
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Install dependencies:
 
-## Running end-to-end tests
+```bash
+npm install
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Start the development server:
 
-## Further help
+```bash
+npm start
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The app runs locally at `http://localhost:4200/`.
+
+## Available Scripts
+
+- `npm start` - run the Angular dev server
+- `npm run build` - create a production build in `dist/`
+- `npm run watch` - build in watch mode for development
+- `npm test` - run unit tests with Karma
+
+## Notes
+
+- Some external project content is embedded from live URLs and may depend on third-party availability.
+- The music section supports in-page video playback, while direct `View on YouTube` links remain available.
+
+## Deployment
+
+This project is set up as a standard Angular app and can be deployed to any static hosting platform that supports Angular build output.
