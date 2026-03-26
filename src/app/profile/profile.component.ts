@@ -15,7 +15,7 @@ interface NavItem {
 interface SocialLink {
   readonly label: string;
   readonly href: string;
-  readonly kind: 'github' | 'linkedin' | 'email';
+  readonly kind: 'github' | 'linkedin' | 'instagram' | 'whatsapp';
 }
 
 interface ShowcaseImage {
@@ -61,7 +61,6 @@ export class ProfileComponent {
   protected readonly currentYear = new Date().getFullYear();
   protected readonly checkersVisibleOffsets = [-1, 0, 1] as const;
   protected readonly navItems: readonly NavItem[] = [
-    { label: 'Home', target: 'home' },
     { label: 'About', target: 'about' },
     { label: 'Projects', target: 'projects' },
     { label: 'Music', target: 'music' },
@@ -70,12 +69,13 @@ export class ProfileComponent {
   protected readonly socialLinks: readonly SocialLink[] = [
     { label: 'GitHub', href: 'https://github.com/RedRL', kind: 'github' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/harel-yerushalmi-891091178/', kind: 'linkedin' },
-    { label: 'Email', href: 'mailto:harel.yerushalmi@gmail.com', kind: 'email' }
+    { label: 'Instagram', href: 'https://www.instagram.com/harel.yerushalmi', kind: 'instagram' },
+    { label: 'WhatsApp', href: 'https://wa.me/972546602230', kind: 'whatsapp' }
   ];
   protected readonly stats = [
-    { value: '3+', label: 'Years building polished web experiences' },
-    { value: '12', label: 'Concept-to-launch portfolio and product builds' },
-    { value: '100%', label: 'Responsive, animated, and theme-aware UI' }
+    { value: '19', label: 'Years since my first line of code' },
+    { value: '3', label: 'Years of "hands-on" experience' },
+    { value: '100%', label: 'Devoted to whatever it is I am working on' }
   ] as const;
   protected readonly checkersScreens: readonly ShowcaseImage[] = [
     { src: 'assets/images/checkers/open-screen.png', alt: 'Checkers game opening screen' },
@@ -150,9 +150,19 @@ export class ProfileComponent {
       return;
     }
 
-    this.document.getElementById(sectionId)?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
+    const target = this.document.getElementById(sectionId);
+
+    if (!target) {
+      return;
+    }
+
+    const header = this.document.querySelector('.site-header');
+    const headerOffset = header instanceof HTMLElement ? header.getBoundingClientRect().height + 8 : 84;
+    const targetTop = window.scrollY + target.getBoundingClientRect().top - headerOffset;
+
+    window.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: 'smooth'
     });
   }
 
