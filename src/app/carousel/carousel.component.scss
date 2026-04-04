@@ -177,11 +177,55 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .project-card-featured .project-body {
+    padding-left: 0;
+  }
+
   .project-card:not(.project-card-featured) {
     max-width: none;
   }
 
   .project-card:not(.project-card-featured) .project-media {
     width: 100%;
+  }
+}
+
+@media (max-width: 820px) {
+  /* Tighter than body copy (1.8) but slightly roomier than .section-title for wrapped project titles. */
+  .project-body h3 {
+    line-height: 1.08;
+  }
+
+  .project-description,
+  .project-prompt {
+    line-height: 1.8;
+  }
+
+  .project-card-featured {
+    align-items: start;
+  }
+
+  .project-card-featured .project-body {
+    min-height: 0;
+    align-content: start;
+    gap: 0.6rem;
+  }
+
+  .project-card-featured .project-media {
+    max-width: min(100%, 15.5rem);
+    margin-inline: auto;
+  }
+
+  .project-card:not(.project-card-featured) .project-media {
+    width: min(100%, 14.5rem);
+    height: 14.5rem;
+    margin-inline: auto;
+  }
+
+  .project-card-featured .project-audio {
+    min-height: 0;
+    padding: 0.7rem 0.8rem;
+    width: min(100%, 20rem);
+    margin-inline: auto;
   }
 }

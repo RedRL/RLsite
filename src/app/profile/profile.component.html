@@ -2,7 +2,10 @@
   <div class="backdrop-grid" aria-hidden="true"></div>
 
   <header class="site-header glass-card">
-    <a class="brand" href="#home" (click)="scrollToSection('home'); $event.preventDefault()">
+    <a
+      class="brand"
+      [attr.href]="narrowLayout() ? '#hero-title-anchor' : '#home'"
+      (click)="scrollToSection(narrowLayout() ? 'hero-title-anchor' : 'home'); $event.preventDefault()">
       <span class="brand-mark">RL</span>
       <span class="brand-copy">Yerushalmi</span>
     </a>
@@ -36,7 +39,7 @@
   <section id="home" class="hero-section">
     <div class="hero-copy" appScrollReveal>
       <span class="eyebrow">Creative developer portfolio</span>
-      <h1 class="hero-title">Harel J. Yerushalmi</h1>
+      <h1 [attr.id]="narrowLayout() ? 'hero-title-anchor' : null" class="hero-title">Harel J. Yerushalmi</h1>
       <p class="hero-text hero-summary">
         full-stack developer <span aria-hidden="true">&bull;</span> musician
         <span aria-hidden="true">&bull;</span> teacher
@@ -201,62 +204,143 @@
       </p>
     </div>
 
-    <div class="section-intro" appScrollReveal>
-      <span class="eyebrow">Featured app</span>
-      <h2 class="section-title">Brain Power MVP</h2>
-      <p class="section-copy">
-        The Brain Power app was built and sold as a primal app idea, and this section showcases the
-        MVP through an embedded phone simulation.
-      </p>
-    </div>
-
-    <div class="app-showcase-layout">
-      <article class="app-showcase-copy glass-card" appScrollReveal [revealDelay]="80">
-        <span class="app-showcase-kicker">MVP concept</span>
-        <h3>Explore the app inside a phone simulation</h3>
-        <p>
-          Brain Power was created as an MVP around a primal app idea and was intended for elderly
-          users, with a focus on improving quality of life and overall well-being through an
-          accessible mobile experience.
+    @if (!narrowLayout()) {
+      <div class="section-intro section-intro--feature" appScrollReveal>
+        <span class="eyebrow">Featured app</span>
+        <h2 class="section-title">Brain Power MVP</h2>
+        <p class="section-copy">
+          The Brain Power app was built and sold as a primal app idea, and this section showcases the
+          MVP through an embedded phone simulation.
         </p>
-        <p class="app-showcase-note">
-          Note: due to unexpected AWS overcharges, some content in this preview may currently be
-          unavailable.
+      </div>
+
+      <div class="app-showcase-layout">
+        <article class="app-showcase-copy glass-card" appScrollReveal [revealDelay]="80">
+          <span class="app-showcase-kicker">MVP concept</span>
+          <h3>Explore the app inside a phone simulation</h3>
+          <p>
+            Brain Power was created as an MVP around a primal app idea and was intended for elderly
+            users, with a focus on improving quality of life and overall well-being through an
+            accessible mobile experience.
+          </p>
+          <p class="app-showcase-note">
+            Note: due to unexpected AWS overcharges, some content in this preview may currently be
+            unavailable.
+          </p>
+          <div class="checkers-showcase-actions">
+            <a
+              class="inline-link project-github-link"
+              href="https://github.com/RedRL/brain-power-app"
+              target="_blank"
+              rel="noreferrer">
+              View on GitHub
+            </a>
+          </div>
+        </article>
+
+        <article class="app-device-wrap" appScrollReveal [revealDelay]="160">
+          <div class="app-device-shadow" aria-hidden="true"></div>
+          <div class="app-device glass-card">
+            <div class="app-device__top" aria-hidden="true">
+              <span class="app-device__camera"></span>
+              <span class="app-device__speaker"></span>
+            </div>
+
+            <div class="app-device__screen">
+              <iframe
+                src="https://yerushalmi-rl.com/brain-power-app/"
+                title="Brain Power app live preview"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin">
+              </iframe>
+            </div>
+          </div>
+        </article>
+      </div>
+    } @else {
+      <div class="section-intro section-intro--sub section-intro--feature" appScrollReveal>
+        <span class="eyebrow">Featured app</span>
+        <h2 class="section-title">Brain Power MVP</h2>
+        <p class="section-copy">
+          The Brain Power app was built and sold as a primal app idea, and this section showcases the
+          MVP through an embedded phone simulation.
         </p>
-        <div class="checkers-showcase-actions">
-          <a
-            class="inline-link project-github-link"
-            href="https://github.com/RedRL/brain-power-app"
-            target="_blank"
-            rel="noreferrer">
-            View on GitHub
-          </a>
-        </div>
-      </article>
+      </div>
 
-      <article class="app-device-wrap" appScrollReveal [revealDelay]="160">
-        <div class="app-device-shadow" aria-hidden="true"></div>
-        <div class="app-device glass-card">
-          <div class="app-device__top" aria-hidden="true">
-            <span class="app-device__camera"></span>
-            <span class="app-device__speaker"></span>
+      <div class="app-showcase-layout">
+        <article class="app-showcase-copy glass-card" appScrollReveal [revealDelay]="80">
+          <span class="app-showcase-kicker">MVP concept</span>
+          <h3>Explore the app inside a phone simulation</h3>
+          <p>
+            Brain Power was created as an MVP around a primal app idea and was intended for elderly
+            users, with a focus on improving quality of life and overall well-being through an
+            accessible mobile experience.
+          </p>
+          <p class="app-showcase-note">
+            Note: due to unexpected AWS overcharges, some content in this preview may currently be
+            unavailable.
+          </p>
+          <div class="checkers-showcase-actions">
+            <a
+              class="inline-link project-github-link"
+              href="https://github.com/RedRL/brain-power-app"
+              target="_blank"
+              rel="noreferrer">
+              View on GitHub
+            </a>
           </div>
+        </article>
 
-          <div class="app-device__screen">
-            <iframe
-              src="https://yerushalmi-rl.com/brain-power-app/"
-              title="Brain Power app live preview"
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin">
-            </iframe>
+        <article
+          id="phone-simulation-anchor"
+          class="app-device-wrap app-device-wrap--preview"
+          appScrollReveal
+          [revealDelay]="160">
+          <button
+            type="button"
+            class="app-device-open-btn inline-link project-github-link"
+            (click)="openPhonePreview()">
+            Open phone simulation
+          </button>
+          <div
+            class="app-device-holder"
+            [class.app-device-holder--open]="phonePreviewOpen()">
+            <div class="app-device-holder__inner">
+              <button
+                type="button"
+                class="app-device-close"
+                (click)="closePhonePreview()"
+                aria-label="Hide phone preview">
+                &times;
+              </button>
+              <div class="app-device-shadow" aria-hidden="true"></div>
+              <div class="app-device glass-card">
+                <div class="app-device__top" aria-hidden="true">
+                  <span class="app-device__camera"></span>
+                  <span class="app-device__speaker"></span>
+                </div>
+
+                <div class="app-device__screen">
+                  <iframe
+                    src="https://yerushalmi-rl.com/brain-power-app/"
+                    title="Brain Power app live preview"
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin">
+                  </iframe>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </article>
-    </div>
+        </article>
+      </div>
+    }
   </section>
 
   <section class="content-section checkers-showcase-section">
-    <div class="section-intro" appScrollReveal>
+    <div
+      class="section-intro section-intro--feature"
+      [class.section-intro--sub]="narrowLayout()"
+      appScrollReveal>
       <span class="eyebrow">Classic build</span>
       <h2 class="section-title">Checkers Game in C#</h2>
       <p class="section-copy">
@@ -297,22 +381,52 @@
           &#8249;
         </button>
 
-        <div class="checkers-gallery__viewport">
-          @for (offset of checkersVisibleOffsets; track offset) {
-            <button
-              type="button"
-              class="checkers-gallery__slide glass-card"
-              [class.is-active]="offset === 0"
-              [class.is-side]="offset !== 0"
-              (click)="openCheckersLightbox(getCheckersSlide(offset))"
-              [attr.aria-label]="'Open ' + getCheckersSlide(offset).alt">
-              <img
-                [src]="getCheckersSlide(offset).src"
-                [alt]="getCheckersSlide(offset).alt"
-                loading="lazy">
-            </button>
-          }
-        </div>
+        @if (!narrowLayout()) {
+          <div class="checkers-gallery__viewport">
+            @for (offset of checkersVisibleOffsets; track offset) {
+              <button
+                type="button"
+                class="checkers-gallery__slide glass-card"
+                [class.is-active]="offset === 0"
+                [class.is-side]="offset !== 0"
+                (click)="openCheckersLightbox(getCheckersSlide(offset))"
+                [attr.aria-label]="'Open ' + getCheckersSlide(offset).alt">
+                <img
+                  [src]="getCheckersSlide(offset).src"
+                  [alt]="getCheckersSlide(offset).alt"
+                  loading="lazy">
+              </button>
+            }
+          </div>
+        } @else {
+          <div class="checkers-gallery__viewport checkers-gallery__viewport--swiper">
+            <swiper-container
+              #checkersSwiper
+              class="checkers-swiper"
+              slides-per-view="auto"
+              centered-slides="true"
+              space-between="14"
+              speed="380"
+              threshold="8"
+              resistance-ratio="0.65"
+              watch-slides-progress="true"
+              observer="true"
+              observe-slide-children="true"
+              auto-height="true">
+              @for (screen of checkersScreens; track screen.src) {
+                <swiper-slide class="checkers-swiper__slide">
+                  <button
+                    type="button"
+                    class="checkers-gallery__slide glass-card checkers-swiper__card"
+                    (click)="openCheckersLightbox(screen)"
+                    [attr.aria-label]="'Open ' + screen.alt">
+                    <img [src]="screen.src" [alt]="screen.alt" loading="lazy">
+                  </button>
+                </swiper-slide>
+              }
+            </swiper-container>
+          </div>
+        }
 
         <button
           type="button"
@@ -358,7 +472,10 @@
   }
 
   <section class="content-section aws-showcase-section">
-    <div class="section-intro" appScrollReveal>
+    <div
+      class="section-intro section-intro--feature"
+      [class.section-intro--sub]="narrowLayout()"
+      appScrollReveal>
       <span class="eyebrow">AWS project</span>
       <h2 class="section-title">License Plate Recognition on AWS</h2>
       <p class="section-copy">
@@ -470,7 +587,10 @@
   </section>
 
   <section id="ml-projects" class="content-section projects-section">
-    <div class="section-intro" appScrollReveal>
+    <div
+      class="section-intro section-intro--feature"
+      [class.section-intro--sub]="narrowLayout()"
+      appScrollReveal>
       <span class="eyebrow">Machine learning</span>
       <h2 class="section-title">Machine Learning Projects</h2>
       <p class="section-copy">
@@ -483,24 +603,51 @@
   </section>
 
   <section class="content-section github-section">
-    <article class="github-card glass-card" appScrollReveal>
-      <div class="github-copy">
+    @if (!narrowLayout()) {
+      <div class="section-intro github-section-kicker" appScrollReveal>
         <span class="eyebrow">More projects</span>
-        <h2 class="section-title">Explore more on GitHub</h2>
-        <p class="section-copy">
-          For more projects across different subjects, check out my GitHub account.
-        </p>
       </div>
 
-      <a
-        class="github-avatar-link"
-        href="https://github.com/RedRL"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Open Harel Yerushalmi GitHub account">
-        <img src="assets/images/github.png" alt="GitHub account">
-      </a>
-    </article>
+      <article class="github-card glass-card" appScrollReveal [revealDelay]="100">
+        <div class="github-copy">
+          <h2 class="section-title">Explore more on GitHub</h2>
+          <p class="section-copy">
+            For more projects across different subjects, check out my GitHub account.
+          </p>
+        </div>
+
+        <a
+          class="github-avatar-link"
+          href="https://github.com/RedRL"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Open Harel Yerushalmi GitHub account">
+          <img src="assets/images/github.png" alt="GitHub account">
+        </a>
+      </article>
+    } @else {
+      <div class="section-intro github-section-kicker" appScrollReveal>
+        <span class="eyebrow">More projects</span>
+      </div>
+
+      <article class="github-card glass-card" appScrollReveal [revealDelay]="100">
+        <div class="github-copy">
+          <h2 class="section-title">Explore more on GitHub</h2>
+          <p class="section-copy">
+            For more projects across different subjects, check out my GitHub account.
+          </p>
+        </div>
+
+        <a
+          class="github-avatar-link"
+          href="https://github.com/RedRL"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Open Harel Yerushalmi GitHub account">
+          <img src="assets/images/github.png" alt="GitHub account">
+        </a>
+      </article>
+    }
   </section>
 
   <section id="music" class="content-section music-section">
@@ -629,7 +776,20 @@
     <app-contact-me></app-contact-me>
   </section>
 
+  @if (narrowLayout()) {
+    <button
+      type="button"
+      class="jump-to-top glass-card"
+      [class.jump-to-top--visible]="showJumpToTop()"
+      (click)="scrollToTop()"
+      aria-label="Jump to top">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 5.5 5 13h4v7h6v-7h4L12 5.5Z" />
+      </svg>
+    </button>
+  }
+
   <footer class="site-footer">
-    <span>&copy; {{ currentYear }} Harel Yerushalmi. Designed to glow in every theme.</span>
+    <span>&copy; {{ currentYear }} Harel Yerushalmi</span>
   </footer>
 </main>

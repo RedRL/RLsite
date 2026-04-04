@@ -70,11 +70,28 @@ html[data-theme='light'] {
 
 html {
   scroll-behavior: smooth;
+  font-size: 100%;
+}
+
+@media (max-width: 820px) {
+  /*
+   * Smaller rem scale than 100vw/22 so most page copy is smaller on phones.
+   * Header + hero name + tagline stay visually the same (see profile compensations).
+   */
+  html {
+    font-size: calc(100vw / 25);
+  }
+
+  /* Default readable line-height for copy (matches showcase body paragraphs, e.g. Brain Power). */
+  body {
+    line-height: 1.8;
+  }
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  overflow-x: hidden;
   font-family: 'Inter', 'Segoe UI', sans-serif;
   background:
     radial-gradient(circle at top left, rgba(26, 155, 130, 0.22), transparent 34%),
@@ -85,6 +102,39 @@ body {
   transition:
     background-color 220ms ease,
     color 220ms ease;
+}
+
+/*
+ * Desktop: prevent scrolling past the document ends (rubber-band).
+ * overscroll-behavior on html alone is often ignored; the scroll chain must live on a real
+ * overflow box — here, body scrolls inside a locked-height html.
+ */
+@media (min-width: 821px) {
+  /* One knob: fixed header offset + estimated bar height + gap (see profile .site-header) */
+  :root {
+    --profile-desktop-header-band: calc(1rem + 4.85rem + 8px);
+  }
+
+  html {
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  body {
+    height: 100%;
+    max-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
+    scroll-padding-top: var(--profile-desktop-header-band);
+  }
+
+  app-root {
+    display: block;
+    overscroll-behavior-y: none;
+  }
 }
 
 body::before,
@@ -138,6 +188,30 @@ img {
   letter-spacing: 0.02em;
 }
 
+.section-intro--sub .section-title {
+  font-size: clamp(2.1rem, 4.2vw, 3.55rem);
+  line-height: 0.94;
+}
+
+@media (max-width: 820px) {
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .section-intro--sub .section-title {
+    font-size: 2.05rem;
+  }
+}
+
+/* Desktop: smaller type for project-feature intros and GitHub card (see profile). */
+@media (min-width: 821px) {
+  .section-intro--feature .section-title,
+  .github-section .github-card .section-title {
+    font-size: clamp(2.35rem, 4.8vw, 3.95rem);
+    line-height: 0.94;
+  }
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -151,6 +225,8 @@ img {
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .eyebrow::before {
@@ -195,5 +271,21 @@ img {
     animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Checkers Swiper: give the custom element room; inner .swiper may still clip in shadow DOM. */
+swiper-container.checkers-swiper {
+  overflow: visible;
+}
+
+@media (max-width: 820px) {
+  /*
+   * Swiper’s internal .swiper uses overflow:hidden (shadow DOM). Let height breathe vertically
+   * so scaled slides + shadows are not cut off; horizontal overflow stays hidden for the track.
+   */
+  swiper-container.checkers-swiper::part(container) {
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 }
