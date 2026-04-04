@@ -473,7 +473,7 @@
 }
 
 .orb-bubble__icon--download,
-.orb-bubble__label {
+.orb-bubble__label-flyout {
   position: absolute;
   opacity: 0;
 }
@@ -486,7 +486,7 @@
   transform: scale(0.7);
 }
 
-.orb-bubble__label {
+.orb-bubble__label-flyout {
   top: 50%;
   right: calc(100% + 0.85rem);
   transform: translateY(-50%) translateX(0.5rem);
@@ -504,6 +504,10 @@
     opacity 180ms ease,
     transform 180ms ease;
   pointer-events: none;
+}
+
+.orb-bubble__label-inline {
+  display: none;
 }
 
 .orb-bubble:hover,
@@ -527,8 +531,8 @@
   transform: scale(1);
 }
 
-.orb-bubble:hover .orb-bubble__label,
-.orb-bubble:focus-visible .orb-bubble__label {
+.orb-bubble:hover .orb-bubble__label-flyout,
+.orb-bubble:focus-visible .orb-bubble__label-flyout {
   opacity: 1;
   transform: translateY(-50%) translateX(0);
 }
@@ -1632,6 +1636,73 @@
   .github-avatar-link {
     justify-self: start;
   }
+
+  .orb-bubble {
+    width: 5.5rem;
+    aspect-ratio: 1;
+    min-height: unset;
+    padding: 0;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+  }
+
+  .orb-bubble__icon {
+    display: none;
+  }
+
+  .orb-bubble__label-flyout {
+    display: none;
+  }
+
+  .orb-bubble__label-inline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    max-width: 78%;
+    padding: 0;
+    opacity: 1;
+    transform: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    color: #fff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.08;
+    text-align: center;
+    text-transform: lowercase;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 10px rgba(55, 14, 120, 0.35));
+  }
+
+  .orb-bubble__label-line {
+    display: block;
+  }
+
+  .orb-bubble__label-line:last-child {
+    text-transform: none;
+    font-size: 1.05em;
+    letter-spacing: 0.12em;
+  }
+
+  .orb-bubble:hover .orb-bubble__icon--document,
+  .orb-bubble:focus-visible .orb-bubble__icon--document,
+  .orb-bubble:hover .orb-bubble__icon--download,
+  .orb-bubble:focus-visible .orb-bubble__icon--download {
+    opacity: 0;
+    transform: none;
+  }
+
+  .orb-bubble:hover .orb-bubble__label-inline,
+  .orb-bubble:focus-visible .orb-bubble__label-inline {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1742,8 +1813,7 @@
   }
 
   .content-section > .section-intro {
-    padding-left: 0.65rem;
-    padding-right: 0.15rem;
+    padding-inline: 0.65rem;
     box-sizing: border-box;
     max-width: 100%;
     min-width: 0;
@@ -1765,7 +1835,6 @@
   .brand {
     justify-self: start;
     text-align: left;
-    margin-left: -0.35rem;
   }
 
   .navigation {
@@ -1802,20 +1871,30 @@
   }
 
   .hero-copy {
+    display: grid;
+    justify-items: center;
     width: 100%;
     max-width: 100%;
     min-width: 0;
     box-sizing: border-box;
-    padding-inline: 0.2rem;
-    justify-items: center;
+    padding-inline: 0.65rem;
   }
 
+  /* Full-width bar, label left — same pattern as section intros */
+  .content-section > .section-intro .eyebrow,
   .hero-section .eyebrow {
-    max-width: 100%;
+    justify-self: stretch;
+    width: 100%;
+    max-width: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
     box-sizing: border-box;
-    font-size: 0.66rem;
-    letter-spacing: 0.1em;
-    padding-inline: 0.65rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    padding: 0.55rem 0.95rem;
+    white-space: normal;
   }
 
   /* Keep name + tagline same visual size vs former html calc(100vw / 22) */
@@ -1824,6 +1903,8 @@
     max-width: 100%;
     box-sizing: border-box;
     padding-inline: 0.1rem;
+    text-align: center;
+    width: 100%;
   }
 
   .site-header .brand-mark {
