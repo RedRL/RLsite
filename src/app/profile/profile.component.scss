@@ -1826,7 +1826,7 @@
   .site-header {
     justify-content: center;
     gap: 0.9rem;
-    padding-inline: 0.85rem;
+    padding-inline: 0.65rem 0.85rem;
     max-width: 100%;
     min-width: 0;
     box-sizing: border-box;
@@ -1835,11 +1835,12 @@
   .brand {
     justify-self: start;
     text-align: left;
+    margin-left: 0;
   }
 
   .navigation {
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1.75rem;
     width: 100%;
     margin-block: 0.55rem;
@@ -2203,7 +2204,7 @@
 
   /* Sit dots nearer the carousel: trim viewport bottom air + offset grid row gap */
   .checkers-showcase-layout .checkers-gallery__dots {
-    margin-top: -0.55rem;
+    margin-top: -2rem;
   }
 
   /*
@@ -2214,8 +2215,8 @@
   .checkers-gallery__viewport--swiper {
     width: 100%;
     min-width: 0;
-    min-height: calc(3rem + 2.2rem + 0.84rem + (min(76vw, 16.5rem) * 10 / 16));
-    padding: 2.75rem 0 0.25rem;
+    min-height: calc(3rem + 2.2rem + 0.84rem + 1.85rem + 0.9rem + (min(76vw, 16.5rem) * 10 / 16));
+    padding: 1.35rem 0 0.25rem;
     box-sizing: border-box;
     overflow: visible;
   }
@@ -2223,7 +2224,7 @@
   .checkers-swiper {
     display: block;
     width: 100%;
-    min-height: 0;
+    min-height: calc(2.2rem + (min(76vw, 16.5rem) * 10 / 16) + 2.35rem + 0.9rem);
     height: auto;
     --swiper-theme-color: var(--secondary);
     overflow: visible;
